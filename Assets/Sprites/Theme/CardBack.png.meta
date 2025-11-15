@@ -93,7 +93,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChatGPT_Image_Nov_15__2025__03_41_47_PM-removebg-preview_0
+      name: Card back
       rect:
         serializedVersion: 2
         x: 50
@@ -101,7 +101,7 @@ TextureImporter:
         width: 150
         height: 169
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 1}
       outline: []
       physicsShape: []
@@ -109,27 +109,6 @@ TextureImporter:
       bones: []
       spriteID: f90c22926a22e644dad7649b1691e2a1
       internalID: -1315358323
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ChatGPT_Image_Nov_15__2025__03_41_47_PM-removebg-preview_1
-      rect:
-        serializedVersion: 2
-        x: 411
-        y: 263
-        width: 155
-        height: 123
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3e32c0572c60b3e46a407589d3026a82
-      internalID: -1245352378
       vertices: []
       indices: 
       edges: []
@@ -145,7 +124,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ChatGPT_Image_Nov_15__2025__03_41_47_PM-removebg-preview_0: -1315358323
+      Card back: -1315358323
       ChatGPT_Image_Nov_15__2025__03_41_47_PM-removebg-preview_1: -1245352378
   spritePackingTag: 
   pSDRemoveMatte: 0
