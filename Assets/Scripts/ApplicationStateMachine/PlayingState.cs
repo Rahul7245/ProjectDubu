@@ -1,15 +1,13 @@
-public class PlayingState : IState
+public class PlayingState : BaseApplicationState
 {
-    public void OnEnter()
+    public PlayingState(StateMachine<ApplicationState> _stateMachine) : base(_stateMachine)
     {
-        UnityEngine.Debug.Log("Game Started");
+        
     }
 
-    public void OnUpdate()
+    public override void OnEnter()
     {
+        UnityEngine.Debug.Log("Entered Playing");
     }
 
-    public void OnExit()
-    {
-    }
 }

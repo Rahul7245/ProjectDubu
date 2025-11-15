@@ -1,11 +1,13 @@
-public class GameOverState : IState
+public class GameOverState : BaseApplicationState
 {
-    public void OnEnter()
+    public GameOverState(StateMachine<ApplicationState> _stateMachine) : base(_stateMachine)
     {
-        UnityEngine.Debug.Log("Game Over");
+        
     }
 
-    public void OnUpdate() { }
+    public override void OnEnter()
+    {
+        UnityEngine.Debug.Log("Entered GameOver");
+    }
 
-    public void OnExit() { }
 }

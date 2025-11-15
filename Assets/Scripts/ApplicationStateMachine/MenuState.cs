@@ -1,13 +1,13 @@
-public class MainMenuState : IState
+public class MainMenuState : BaseApplicationState
 {
-    public void OnEnter()
+    public MainMenuState(StateMachine<ApplicationState> _stateMachine) : base(_stateMachine)
+    {
+        
+    }
+
+    public override void OnEnter()
     {
         UnityEngine.Debug.Log("Entered Main Menu");
     }
 
-    public void OnUpdate() { }
-
-    public void OnExit()
-    {
-    }
 }
