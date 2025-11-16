@@ -36,9 +36,10 @@ public class GameManager : MonoBehaviour
         eventBusModel.Initialize();
     }
 
-    void OnApplicationQuit()
+    void OnDestroy()
     {
         eventBusModel.Shutdown();
+        eventBusModel =null;
     }
 
 }

@@ -22,7 +22,7 @@ public class GameOverView : MonoBehaviour
         scoreText.text = EventBusModel.score.Value.ToString("F2") +"%";
         EventBusModel.playAudio.Value = AudioType.WIN;
     }
-    void OnDestroy()
+    void OnApplicationQuit()
     {
         homeButton.onClick.RemoveAllListeners();
          EventBusModel.score.Unsubscribe(ShowScore);

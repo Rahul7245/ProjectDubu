@@ -37,7 +37,7 @@ public class PlayingView : MonoBehaviour
         EventBusModel.playAudio.Value = AudioType.BUTTON;
         SaveLoadSystem.SaveGame(gameData);
     }
-    void OnDestroy()
+    void OnApplicationQuit()
     {
         EventBusModel.gameStart.Unsubscribe(InitGameView);
         homeButton.onClick.RemoveAllListeners();

@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
         EventBusModel.applicationStateEntered.Subscribe(OnNewStateEntered);
         EventBusModel.applicationStateExited.Subscribe(OnStateExited);
     }
-    void OnDestroy()
+    void OnApplicationQuit()
     {
         EventBusModel.applicationStateEntered.Unsubscribe(OnNewStateEntered);
         EventBusModel.applicationStateExited.Unsubscribe(OnStateExited);
