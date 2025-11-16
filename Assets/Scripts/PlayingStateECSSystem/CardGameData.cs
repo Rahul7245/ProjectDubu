@@ -9,6 +9,4 @@ public class CardGameData
     public int totalPairs = 0;
     public int turnsTaken = 0;
     public bool isProcessingMatch = false;
-    public float flipAnimationDuration = 0.3f;
-    public float matchCheckDelay = 0.5f;
 }
