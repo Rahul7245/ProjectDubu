@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 401059513713776050}
   - component: {fileID: 401059513713776051}
+  - component: {fileID: 805888242163151377}
   m_Layer: 5
   m_Name: GameView
   m_TagString: Untagged
@@ -126,7 +127,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a9f84010d5f034bab0b3d65ca5cc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRows: 5
-  numberOfCols: 6
   containerRect: {fileID: 401059513236556028}
   gridLayout: {fileID: 401059513236556026}
+--- !u!114 &805888242163151377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401059513713776053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a468156029386b4fa06412ab561d7b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardGridResizer: {fileID: 401059513713776051}
+  iconHolder: {fileID: 11400000, guid: 5633d0cb0cd6dc54a9dcef667e8de4cf, type: 2}

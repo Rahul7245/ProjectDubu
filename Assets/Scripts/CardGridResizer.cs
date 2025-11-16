@@ -3,18 +3,11 @@ using UnityEngine.UI;
 
 public class CardGridResizer : MonoBehaviour
 {
-    [SerializeField] private int numberOfRows = 2;
-    [SerializeField] private int numberOfCols = 3;
     [SerializeField] private RectTransform containerRect; // The panel/area where cards should fit
     [SerializeField] private GridLayoutGroup gridLayout;
     
     // Card aspect ratio is 2:3 (width:height)
     private const float CARD_ASPECT_RATIO = 2f / 3f; // width / height
-    
-    void Start()
-    {
-       Init(numberOfRows,numberOfCols);
-    }
 
     public void Init(int rows, int columns)
     {

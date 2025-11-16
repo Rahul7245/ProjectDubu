@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         applicationStateMachine = new();
         applicationStateMachine.AddState(ApplicationState.MENU, new MainMenuState(applicationStateMachine));
         applicationStateMachine.AddState(ApplicationState.PLAYING, new PlayingState(applicationStateMachine));
-       // applicationStateMachine.AddState(ApplicationState.GAMEOVER, new MainMenuState(applicationStateMachine));
+        applicationStateMachine.AddState(ApplicationState.GAMEOVER, new GameOverState(applicationStateMachine));
         applicationStateMachine.ChangeState(ApplicationState.MENU);
     }
 

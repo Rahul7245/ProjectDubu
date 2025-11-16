@@ -9,6 +9,7 @@ public class PlayingState : BaseApplicationState
     {
         UnityEngine.Debug.Log("Entered Playing");
         EventBusModel.applicationStateEntered.Value =ApplicationState.PLAYING;
+        EventBusModel.gameStart.Value = EventBusModel.playButtonClicked.Value;
     }
 
 }
