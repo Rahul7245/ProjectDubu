@@ -113,6 +113,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Menu
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 267
+        width: 155
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6470fb9525f184b41b0f753117842d8e
+      internalID: 675136520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,6 +147,7 @@ TextureImporter:
     nameFileIdTable:
       Card back: -1315358323
       ChatGPT_Image_Nov_15__2025__03_41_47_PM-removebg-preview_1: -1245352378
+      Menu: 675136520
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

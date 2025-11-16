@@ -11,17 +11,23 @@ public class PlayingState : BaseApplicationState
         EventBusModel.applicationStateEntered.Value =ApplicationState.PLAYING;
         EventBusModel.gameStart.Value = EventBusModel.playButtonClicked.Value;
         EventBusModel.gameOver.Subscribe(GameOver);
+         EventBusModel.homeButton.Subscribe(OnHomeButtonClicked);
     }
 
     public override void OnExit()
     {
         EventBusModel.gameOver.Unsubscribe(GameOver);
         EventBusModel.applicationStateExited.Value =ApplicationState.PLAYING;
+         EventBusModel.homeButton.Unsubscribe(OnHomeButtonClicked);
     }
 
     public void GameOver()
     {
         stateMachine.ChangeState(ApplicationState.GAMEOVER);
+    }
+    private void OnHomeButtonClicked()
+    {
+        stateMachine.ChangeState(ApplicationState.MENU);
     }
 
 }

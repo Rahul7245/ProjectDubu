@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayingView : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayingView : MonoBehaviour
     [SerializeField]private Transform cardParentGrid;
     [SerializeField]private TextMeshProUGUI matchedText;
     [SerializeField]private TextMeshProUGUI turnsTakenText;
+    [SerializeField] private Button homeButton;
     private List<CardView> cardViews = new List<CardView>();
     private bool isCheckingMatch = false;
     private CardGameData gameData;
@@ -19,9 +21,18 @@ public class PlayingView : MonoBehaviour
     {
         EventBusModel.gameStart.Subscribe(InitGameView);
     }
+    void Start()
+    {
+        homeButton.onClick.AddListener(OnHomeButtonClicked);
+    }
+      public void OnHomeButtonClicked()
+    {
+        EventBusModel.homeButton.Invoke();
+    }
     void OnDestroy()
     {
         EventBusModel.gameStart.Unsubscribe(InitGameView);
+        homeButton.onClick.RemoveAllListeners();
     }
 
     private void InitGameView()
@@ -36,14 +47,6 @@ public class PlayingView : MonoBehaviour
     {
         gameData = new CardGameData();
         var iconList = iconHolder.FetchIcons((rows*columns)/2);
-        //For Debugging purpose only
-        // string s=String.Empty;
-        // foreach(var i in iconList)
-        // {
-        //     s+=i.id+",";
-        // }
-        // Debug.Log(s);
-        // Clear existing views
         foreach (var view in cardViews)
         {
             if (view != null) Destroy(view.gameObject);
