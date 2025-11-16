@@ -11,6 +11,7 @@ public class GameOverState : BaseApplicationState
         EventBusModel.applicationStateEntered.Value = ApplicationState.GAMEOVER;
         EventBusModel.score.Value = EventBusModel.gameOver.Value;
         EventBusModel.homeButton.Subscribe(OnHomeButtonClicked);
+        SaveLoadSystem.DeleteSave();
     }
     public override void OnExit()
     {
