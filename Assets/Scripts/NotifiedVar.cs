@@ -28,10 +28,10 @@ public class NotifiedVar<T>
 	/// <summary>
 	/// for object type references
 	/// </summary>
-	public void Changed()
-	{
-		Invoke();
-	}
+	// public void Changed()
+	// {
+	// 	Invoke();
+	// }
 
 	private void Invoke()
 	{

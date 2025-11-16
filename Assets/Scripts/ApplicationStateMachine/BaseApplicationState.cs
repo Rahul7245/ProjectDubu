@@ -7,7 +7,6 @@ public class BaseApplicationState : IState
     }
     public virtual void OnEnter()
     {
-        UnityEngine.Debug.Log("Entered Main Menu");
     }
 
     public virtual void OnUpdate() { }

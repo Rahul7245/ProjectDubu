@@ -8,6 +8,7 @@ public class PlayingState : BaseApplicationState
     public override void OnEnter()
     {
         UnityEngine.Debug.Log("Entered Playing");
+        EventBusModel.applicationStateEntered.Value =ApplicationState.PLAYING;
     }
 
 }
