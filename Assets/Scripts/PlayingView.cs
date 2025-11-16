@@ -19,12 +19,6 @@ public class PlayingView : MonoBehaviour
     private CardGameData gameData;
     void Awake()
     {
-        StartCoroutine(SkipFirstFrameAndSubscribe());
-    }
-
-    IEnumerator SkipFirstFrameAndSubscribe()
-    {
-        yield return null;
         EventBusModel.gameStart.Subscribe(InitGameView);
     }
     void Start()
