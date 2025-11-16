@@ -11,6 +11,11 @@ public class GameOverView : MonoBehaviour
 
     void Awake()
     {
+        StartCoroutine(SkipFirstFrameAndSubscribe());
+    }
+    IEnumerator SkipFirstFrameAndSubscribe()
+    {
+        yield return null;
         EventBusModel.score.Subscribe(ShowScore);
     }
     void Start()
