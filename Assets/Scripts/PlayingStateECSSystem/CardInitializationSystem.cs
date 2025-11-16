@@ -12,6 +12,8 @@ public static class CardInitializationSystem
         gameData.matchesFound = 0;
         gameData.isProcessingMatch = false;
         gameData.totalPairs = cardDataList.Count;
+        gameData.rows = rows;
+        gameData.columns = cols;
 
         // Create pairs and shuffle
         List<CardComponent> allCards = new List<CardComponent>();
@@ -51,4 +53,14 @@ public static class CardInitializationSystem
             gridIndex = -1
         };
     }
+
+//If the sprite was not getting serialized this method should be called.
+    public static void ReassignSprites(List<CardComponent> cards, IconHolder iconHolder)
+    {
+        for(int i=0;i<cards.Count;i++)
+        {
+            var iconData = iconHolder.iconDataList.FirstOrDefault((c)=>c.id==cards[i].matchId);
+            cards[i].AssignSprite(iconData.icon);
+        }
+    } 
 }

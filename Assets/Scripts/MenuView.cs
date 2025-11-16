@@ -12,6 +12,7 @@ public class MenuView : MonoBehaviour
     [SerializeField] private TMP_InputField columns;
     [SerializeField] private TextMeshProUGUI totalCards;
     [SerializeField] private Button playButton;
+    [SerializeField] private Button continueButton;
     [SerializeField] private TextMeshProUGUI warningText;
     void Awake()
     {
@@ -22,14 +23,39 @@ public class MenuView : MonoBehaviour
         playButton.onClick.AddListener(OnPlayButtonClicked);
         rows.onSelect.AddListener((_)=> {HideShowDisplay(false);});
         columns.onSelect.AddListener((_)=> {HideShowDisplay(false);});
+        continueButton.onClick.AddListener(OnContinueButtonClicked);
 
     }
 
     void Start()
     {
         CalculateTotalCards();
+       
+    }
+    void OnEnable()
+    {
+         InitContinueButton();
     }
 
+    void InitContinueButton()
+    {
+        if (CheckForSavedGame())
+        {
+            continueButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            continueButton.gameObject.SetActive(false);
+        }
+    }
+    private bool CheckForSavedGame()
+    {
+        if (SaveLoadSystem.HasSaveData())
+        {
+            return true;
+        }
+        return false;
+    }
     private void CalculateTotalCards()
     {
         try{
@@ -60,7 +86,14 @@ public class MenuView : MonoBehaviour
            DisplayWarning("Total Cards cannot be 0");
            return;
         }
-        EventBusModel.playButtonClicked.Value = (int.Parse(rows.text),int.Parse(columns.text));
+        EventBusModel.playButtonClicked.Value = new GameStartData(int.Parse(rows.text),int.Parse(columns.text),false);
+
+    }
+
+    private void OnContinueButtonClicked()
+    {
+        EventBusModel.playAudio.Value = AudioType.BUTTON;
+        EventBusModel.playButtonClicked.Value = new GameStartData(0, 0, true);
 
     }
 

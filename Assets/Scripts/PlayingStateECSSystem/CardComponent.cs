@@ -9,5 +9,10 @@ public struct CardComponent
     public CardState state;           // Current state
     public bool isMatched;            // Has this card been matched?
     public int gridIndex;             // Position in grid
+
+    public void AssignSprite(Sprite _sprite)
+    {
+        sprite = _sprite;
+    }
 }
 

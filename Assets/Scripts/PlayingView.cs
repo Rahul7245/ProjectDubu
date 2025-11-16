@@ -14,6 +14,7 @@ public class PlayingView : MonoBehaviour
     [SerializeField]private TextMeshProUGUI matchedText;
     [SerializeField]private TextMeshProUGUI turnsTakenText;
     [SerializeField] private Button homeButton;
+    [SerializeField] private Button saveButton;
     private List<CardView> cardViews = new List<CardView>();
     private bool isCheckingMatch = false;
     private CardGameData gameData;
@@ -24,11 +25,17 @@ public class PlayingView : MonoBehaviour
     void Start()
     {
         homeButton.onClick.AddListener(OnHomeButtonClicked);
+         saveButton.onClick.AddListener(OnSaveButtonClicked);
     }
       public void OnHomeButtonClicked()
     {
         EventBusModel.playAudio.Value = AudioType.BUTTON;
         EventBusModel.homeButton.Invoke();
+    }
+     public void OnSaveButtonClicked()
+    {
+        EventBusModel.playAudio.Value = AudioType.BUTTON;
+        SaveLoadSystem.SaveGame(gameData);
     }
     void OnDestroy()
     {
@@ -38,35 +45,49 @@ public class PlayingView : MonoBehaviour
 
     private void InitGameView()
     {
-        
-        var (rows,columns) = EventBusModel.gameStart.Value;
-        cardGridResizer.Init(rows,columns);
-        InitSession(rows,columns);
+        var gameStartData = EventBusModel.gameStart.Value;
+        ClearOldCards();
+        if (!gameStartData.continueGame)
+        {
+            cardGridResizer.Init(gameStartData.rows, gameStartData.columns);
+            InitSession(gameStartData.rows, gameStartData.columns);
+        }
+        else
+        {
+            gameData = SaveLoadSystem.LoadGame();
+            cardGridResizer.Init(gameData.rows, gameData.columns);
+           // CardInitializationSystem.ReassignSprites(gameData.cards,iconHolder);
+        }
+        InstantiateCards();
+        UpdateScores();
+        SaveLoadSystem.DeleteSave();
     }
 
     private void InitSession(int rows, int columns)
     {
         gameData = new CardGameData();
         var iconList = iconHolder.FetchIcons((rows*columns)/2);
+        // Initialize game data using system
+        CardInitializationSystem.InitializeGame(gameData, iconList, rows, columns);
+    }
+
+    private void ClearOldCards()
+    {
         foreach (var view in cardViews)
         {
             if (view != null) Destroy(view.gameObject);
         }
         cardViews.Clear();
-
-        // Initialize game data using system
-        CardInitializationSystem.InitializeGame(gameData, iconList, rows, columns);
-
-        // Create views for each card
-        foreach (var cardComponent in gameData.cards)
+    }
+    private void InstantiateCards()
+    {
+         foreach (var cardComponent in gameData.cards)
         {
             CardView view = Instantiate(cardViewPrefab,cardParentGrid);
             view.Initialize(cardComponent.entityId, this,cardComponent.sprite);
             view.UpdateView(cardComponent,2f);
             cardViews.Add(view);
         }
-        UpdateScores();
-
     }
 
 
