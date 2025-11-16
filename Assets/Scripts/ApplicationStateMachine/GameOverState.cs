@@ -20,6 +20,7 @@ public class GameOverState : BaseApplicationState
 
     private void OnHomeButtonClicked()
     {
+        EventBusModel.playAudio.Value = AudioType.BUTTON;
         stateMachine.ChangeState(ApplicationState.MENU);
     }
 

@@ -20,6 +20,7 @@ public class GameOverView : MonoBehaviour
     public void ShowScore()
     {
         scoreText.text = EventBusModel.score.Value.ToString("F2");
+        EventBusModel.playAudio.Value = AudioType.WIN;
     }
     void OnDestroy()
     {

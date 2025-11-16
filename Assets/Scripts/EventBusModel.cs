@@ -11,6 +11,7 @@ public class EventBusModel
     public static NotifiedVar<float> gameOver;
     public static NotifiedVar<float> score;
     public static Notify homeButton;
+    public static NotifiedVar<AudioType> playAudio;
 
     //public static NotifiedVar<bool> moving;
     public void Initialize() {
@@ -21,6 +22,7 @@ public class EventBusModel
         gameOver = new NotifiedVar<float>(0);
         homeButton = new();
         score = new NotifiedVar<float>(0);
+        playAudio = new NotifiedVar<AudioType>(AudioType.NONE);
     }
     public void Shutdown() {
         playButtonClicked = null;
@@ -30,5 +32,6 @@ public class EventBusModel
         gameOver = null;
         score = null;
         homeButton = null;
+        playAudio = null;
     }
 }

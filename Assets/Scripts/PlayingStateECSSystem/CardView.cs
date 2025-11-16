@@ -88,6 +88,7 @@ public class CardView : MonoBehaviour
             imageToFlip.gameObject.SetActive(false);
         });
         seq.Play();
+        EventBusModel.playAudio.Value = AudioType.FLIP;
     }
 
 }

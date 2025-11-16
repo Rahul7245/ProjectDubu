@@ -33,7 +33,6 @@ public class MenuView : MonoBehaviour
     private void CalculateTotalCards()
     {
         try{
-        Debug.Log("Calculate called");
         int x = int.Parse(rows.text);
         int y = int.Parse(columns.text);
         totalCards.text = (x * y).ToString();
@@ -46,6 +45,7 @@ public class MenuView : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
+        EventBusModel.playAudio.Value = AudioType.BUTTON;
         if (!int.TryParse(totalCards.text,out int _totalCards))
         {
             DisplayWarning("Invalid");

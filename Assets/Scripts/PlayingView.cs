@@ -27,6 +27,7 @@ public class PlayingView : MonoBehaviour
     }
       public void OnHomeButtonClicked()
     {
+        EventBusModel.playAudio.Value = AudioType.BUTTON;
         EventBusModel.homeButton.Invoke();
     }
     void OnDestroy()
@@ -114,6 +115,7 @@ public class PlayingView : MonoBehaviour
 
         if (isMatch)
         {
+            EventBusModel.playAudio.Value = AudioType.SCORE;
             // Update matched card views
             foreach (int id in gameData.flippedCardIds)
             {
