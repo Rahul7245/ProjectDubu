@@ -8,6 +8,9 @@ public class EventBusModel
     public static NotifiedVar<ApplicationState> applicationStateEntered;
     public static NotifiedVar<ApplicationState> applicationStateExited;
     public static NotifiedVar<(int, int)> gameStart;
+    public static NotifiedVar<float> gameOver;
+    public static NotifiedVar<float> score;
+    public static Notify homeButton;
 
     //public static NotifiedVar<bool> moving;
     public void Initialize() {
@@ -15,10 +18,17 @@ public class EventBusModel
         applicationStateEntered = new(ApplicationState.None);
         applicationStateExited = new(ApplicationState.None);
         gameStart = new NotifiedVar<(int, int)>((0,0));
+        gameOver = new NotifiedVar<float>(0);
+        homeButton = new();
+        score = new NotifiedVar<float>(0);
     }
     public void Shutdown() {
         playButtonClicked = null;
         applicationStateEntered = null;
         applicationStateExited = null;
+        gameStart = null;
+        gameOver = null;
+        score = null;
+        homeButton = null;
     }
 }

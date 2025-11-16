@@ -61,6 +61,7 @@ public class PlayingView : MonoBehaviour
             view.UpdateView(cardComponent,2f);
             cardViews.Add(view);
         }
+        UpdateScores();
 
     }
 
@@ -119,7 +120,8 @@ public class PlayingView : MonoBehaviour
             // Check win condition
             if (WinConditionSystem.IsGameComplete(gameData))
             {
-                Debug.Log("Game Complete! All pairs matched!");
+                EventBusModel.gameOver.Value= 
+                WinConditionSystem.GetCompletionPercentage(gameData);
             }
         }
         else

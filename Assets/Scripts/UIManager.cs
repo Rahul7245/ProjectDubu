@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject menuView;
     [SerializeField] private GameObject gameView;
+    [SerializeField] private GameObject gameOverView;
     void Start()
     {
         EventBusModel.applicationStateEntered.Subscribe(OnNewStateEntered);
@@ -26,6 +27,9 @@ public class UIManager : MonoBehaviour
             case ApplicationState.PLAYING:
             gameView.gameObject.SetActive(true);
             break;
+            case ApplicationState.GAMEOVER:
+            gameOverView.gameObject.SetActive(true);
+            break;
             default:
             break;
         }
@@ -40,6 +44,9 @@ public class UIManager : MonoBehaviour
             break;
             case ApplicationState.PLAYING:
             gameView.gameObject.SetActive(false);
+            break;
+            case ApplicationState.GAMEOVER:
+            gameOverView.gameObject.SetActive(false);
             break;
             default:
             break;

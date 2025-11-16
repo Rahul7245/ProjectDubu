@@ -13,6 +13,6 @@ public static class WinConditionSystem
     public static float GetCompletionPercentage(CardGameData gameData)
     {
         if (gameData.totalPairs == 0) return 0f;
-        return (float)gameData.matchesFound / gameData.totalPairs * 100f;
+        return (float)gameData.matchesFound / gameData.turnsTaken * 100f;
     }
 }
