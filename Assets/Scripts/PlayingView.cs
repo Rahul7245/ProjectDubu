@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayingView : MonoBehaviour
@@ -9,6 +10,8 @@ public class PlayingView : MonoBehaviour
     [SerializeField]private IconHolder iconHolder;
     [SerializeField]private CardView cardViewPrefab;
     [SerializeField]private Transform cardParentGrid;
+    [SerializeField]private TextMeshProUGUI matchedText;
+    [SerializeField]private TextMeshProUGUI turnsTakenText;
     private List<CardView> cardViews = new List<CardView>();
     private bool isCheckingMatch = false;
     private CardGameData gameData;
@@ -136,5 +139,12 @@ public class PlayingView : MonoBehaviour
 
         isCheckingMatch = false;
         gameData.isProcessingMatch = false;
+        UpdateScores();
     }
+
+    void UpdateScores()
+    {
+        matchedText.text = gameData.matchesFound.ToString();
+        turnsTakenText.text = gameData.turnsTaken.ToString();
+    } 
 }

@@ -11,7 +11,7 @@ public static class CardMatchSystem
 
         CardComponent card1 = gameData.cards[card1Index];
         CardComponent card2 = gameData.cards[card2Index];
-
+        gameData.turnsTaken++;
         // Check if they match
         if (card1.matchId == card2.matchId)
         {
