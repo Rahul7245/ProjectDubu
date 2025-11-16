@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class PlayingView : MonoBehaviour
 {
-    [SerializeField] CardGridResizer cardGridResizer;
-    [SerializeField] IconHolder iconHolder;
+    [SerializeField]private CardGridResizer cardGridResizer;
+    [SerializeField]private IconHolder iconHolder;
+    [SerializeField]private CardView cardViewPrefab;
+    [SerializeField]private Transform cardParentGrid;
+    private List<CardView> cardViews = new List<CardView>();
+    private bool isCheckingMatch = false;
+    private CardGameData gameData;
     void Awake()
     {
         EventBusModel.gameStart.Subscribe(InitGameView);
@@ -18,15 +23,16 @@ public class PlayingView : MonoBehaviour
 
     private void InitGameView()
     {
+        
         var (rows,columns) = EventBusModel.gameStart.Value;
         cardGridResizer.Init(rows,columns);
         InitSession(rows,columns);
-
     }
 
     private void InitSession(int rows, int columns)
     {
-        var iconList = iconHolder.FetchIcons(rows*columns);
+        gameData = new CardGameData();
+        var iconList = iconHolder.FetchIcons((rows*columns)/2);
         //For Debugging purpose only
         // string s=String.Empty;
         // foreach(var i in iconList)
@@ -34,6 +40,101 @@ public class PlayingView : MonoBehaviour
         //     s+=i.id+",";
         // }
         // Debug.Log(s);
+        // Clear existing views
+        foreach (var view in cardViews)
+        {
+            if (view != null) Destroy(view.gameObject);
+        }
+        cardViews.Clear();
+
+        // Initialize game data using system
+        CardInitializationSystem.InitializeGame(gameData, iconList, rows, columns);
+
+        // Create views for each card
+        foreach (var cardComponent in gameData.cards)
+        {
+            CardView view = Instantiate(cardViewPrefab,cardParentGrid);
+            view.Initialize(cardComponent.entityId, this,cardComponent.sprite);
+            view.UpdateView(cardComponent,2f);
+            cardViews.Add(view);
+        }
+
+    }
+
+
+    public void OnCardClicked(int cardEntityId)
+    {
+        if (isCheckingMatch) return;
+
+        // Try to flip card using system
+        bool flipped = CardFlipSystem.TryFlipCard(gameData, cardEntityId);
         
+        if (flipped)
+        {
+            // Update view
+            UpdateCardView(cardEntityId);
+
+            // Check if we need to process a match
+            if (gameData.flippedCardIds.Count == 2)
+            {
+                StartCoroutine(ProcessMatchCheck());
+            }
+        }
+    }
+     private void UpdateCardView(int cardEntityId)
+    {
+        int cardIndex = gameData.cards.FindIndex(c => c.entityId == cardEntityId);
+        if (cardIndex == -1) return;
+
+        CardComponent card = gameData.cards[cardIndex];
+        CardView view = cardViews.Find(v => v.EntityId == cardEntityId);
+        
+        if (view != null)
+        {
+            view.UpdateView(card);
+        }
+    }
+
+     private System.Collections.IEnumerator ProcessMatchCheck()
+    {
+        isCheckingMatch = true;
+        gameData.isProcessingMatch = true;
+
+        yield return new WaitForSeconds(Constants.matchCheckDelay);
+
+        // Check for match using system
+        bool isMatch = CardMatchSystem.CheckForMatch(gameData);
+
+        if (isMatch)
+        {
+            // Update matched card views
+            foreach (int id in gameData.flippedCardIds)
+            {
+                UpdateCardView(id);
+            }
+            gameData.flippedCardIds.Clear();
+            // Check win condition
+            if (WinConditionSystem.IsGameComplete(gameData))
+            {
+                Debug.Log("Game Complete! All pairs matched!");
+            }
+        }
+        else
+        {
+            // Flip cards back using system
+            CardMatchSystem.FlipCardsBack(gameData);
+
+            // Update views
+            foreach (var card in gameData.cards)
+            {
+                if (card.state == CardState.FaceDown)
+                {
+                    UpdateCardView(card.entityId);
+                }
+            }
+        }
+
+        isCheckingMatch = false;
+        gameData.isProcessingMatch = false;
     }
 }

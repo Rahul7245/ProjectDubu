@@ -143,3 +143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardGridResizer: {fileID: 401059513713776051}
   iconHolder: {fileID: 11400000, guid: 5633d0cb0cd6dc54a9dcef667e8de4cf, type: 2}
+  cardViewPrefab: {fileID: 4403123469089212511, guid: 7d1b3c8429423c945a889af0a89b2e77,
+    type: 3}
+  cardParentGrid: {fileID: 401059513236556028}
