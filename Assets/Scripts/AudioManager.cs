@@ -12,14 +12,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip scoreSound;
     [SerializeField] private AudioClip buttonSound;
     
-    [Header("Volume Settings")]
-    [SerializeField] [Range(0f, 1f)] private float musicVolume = 0.5f;
-    [SerializeField] [Range(0f, 1f)] private float sfxVolume = 0.8f;
-    
-    private void Awake()
-    {
-    }
-    
     private void Start()
     {
         
