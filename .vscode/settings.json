@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "ProjectDubu.sln"
+    "dotnet.defaultSolution": "ProjectDubu.slnx"
 }

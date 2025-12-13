@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject menuView;
     [SerializeField] private GameObject gameView;
     [SerializeField] private GameObject gameOverView;
-    void Start()
+    void Awake()
     {
         EventBusModel.applicationStateEntered.Subscribe(OnNewStateEntered);
         EventBusModel.applicationStateExited.Subscribe(OnStateExited);
@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     }
     private void OnNewStateEntered()
     {
+        Debug.Log("OnNewStateEntered");
         switch (EventBusModel.applicationStateEntered.Value)
         {
             case ApplicationState.MENU:
